@@ -9,6 +9,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { Edit3Icon } from "lucide-react";
 
 export default function HomePage() {
   return (
@@ -20,7 +21,7 @@ export default function HomePage() {
             <TableHead>No.</TableHead>
             <TableHead className="whitespace-nowrap">Phone Number</TableHead>
             <TableHead>Name</TableHead>
-            <TableHead>Action</TableHead>
+            <TableHead className="text-end">Action</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
@@ -32,12 +33,12 @@ export default function HomePage() {
                 <TableCell className="shrink-0">
                   Lorem ipsum dolor sit amet
                 </TableCell>
-                <TableCell className="flex flex-col gap-2">
+                <TableCell className="flex justify-end gap-2">
                   <Button
-                    size={"sm"}
+                    size={"icon"}
                     className="bg-yellow-500 text-xs font-bold hover:bg-yellow-600"
                   >
-                    Edit
+                    <Edit3Icon className="fill-yellow-600" />
                   </Button>
                   <DeleteConfirmation />
                 </TableCell>
