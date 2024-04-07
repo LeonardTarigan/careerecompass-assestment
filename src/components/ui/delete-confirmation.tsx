@@ -8,6 +8,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
+import { DeleteIcon, TrashIcon } from "lucide-react";
 
 export function DeleteConfirmation() {
   return (
@@ -15,21 +16,20 @@ export function DeleteConfirmation() {
       <DialogTrigger asChild>
         <Button
           variant={"secondary"}
-          size={"sm"}
-          className="text-xs text-rose-500"
+          size={"icon"}
+          className="text-xs text-rose-600"
         >
-          Delete
+          <TrashIcon />
         </Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
-        <DialogHeader>
+        <DialogHeader className="text-start">
           <DialogTitle>Delete Confirmation</DialogTitle>
           <DialogDescription>
             The entry will be removed permanently. Are you sure to proceed?
           </DialogDescription>
         </DialogHeader>
-        <div className="grid gap-4 py-4"></div>
-        <DialogFooter>
+        <DialogFooter className="mt-5 flex flex-col gap-1 md:gap-0">
           <Button variant={"destructive"}>Delete</Button>
           <Button variant={"secondary"}>Cancel</Button>
         </DialogFooter>
