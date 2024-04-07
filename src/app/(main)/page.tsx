@@ -13,7 +13,7 @@ import { Edit3Icon } from "lucide-react";
 
 export default function HomePage() {
   return (
-    <main className="mx-5 max-w-screen-md md:mx-auto">
+    <main className="mx-5 mb-10 max-w-screen-md md:mx-auto">
       <Table>
         <TableCaption>A list of your recent invoices.</TableCaption>
         <TableHeader>
