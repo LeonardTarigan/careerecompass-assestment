@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
-import { Rubik } from "next/font/google";
+import { Plus_Jakarta_Sans, Rubik } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
+import Header from "@/components/ui/header";
 
-const mainFont = Rubik({ subsets: ["latin", "cyrillic"] });
+const mainFont = Plus_Jakarta_Sans({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "DiaLink",
@@ -18,7 +19,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${mainFont.className} mx-auto max-w-screen-md bg-white text-black dark:bg-slate-950 dark:text-slate-200`}
+        className={`${mainFont.className} mb-10 bg-white text-black dark:bg-slate-950 dark:text-slate-200`}
       >
         <ThemeProvider
           attribute="class"
@@ -26,6 +27,7 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
+          <Header />
           {children}
         </ThemeProvider>
       </body>
