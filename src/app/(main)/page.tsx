@@ -10,10 +10,11 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { Edit3Icon } from "lucide-react";
+import Link from "next/link";
 
 export default function HomePage() {
   return (
-    <main className="mx-5 mb-10 max-w-screen-md md:mx-auto">
+    <main className="mb-10 max-w-screen-md px-3 md:mx-auto">
       <Table>
         <TableCaption>A list of your recent invoices.</TableCaption>
         <TableHeader>
@@ -34,12 +35,14 @@ export default function HomePage() {
                   Lorem ipsum dolor sit amet
                 </TableCell>
                 <TableCell className="flex justify-end gap-2">
-                  <Button
-                    size={"icon"}
-                    className="bg-yellow-500 text-xs font-bold hover:bg-yellow-600"
-                  >
-                    <Edit3Icon className="fill-yellow-600" />
-                  </Button>
+                  <Link href={"/contact/slug"}>
+                    <Button
+                      size={"icon"}
+                      className="bg-yellow-500 text-xs font-bold hover:bg-yellow-600"
+                    >
+                      <Edit3Icon />
+                    </Button>
+                  </Link>
                   <DeleteConfirmation />
                 </TableCell>
               </TableRow>
