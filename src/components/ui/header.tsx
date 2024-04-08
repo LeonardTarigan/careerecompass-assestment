@@ -17,9 +17,10 @@ function Header() {
     <header className="mx-auto mb-5 max-w-screen-md">
       <nav className="flex items-center justify-between gap-10 px-3 py-5 md:px-0">
         <Link href={"/"} className="flex items-center gap-1">
-          <Logo className="h-10 w-10 fill-yellow-500 transition-colors duration-150 hover:fill-yellow-700" />
+          <Logo className="h-10 w-10 fill-yellow-400 transition-colors duration-150 hover:fill-yellow-700 dark:fill-yellow-500" />
           <div className={`${logoFont.className} text-2xl font-semibold`}>
-            Dia<span className="text-yellow-500">Link.</span>
+            Dia
+            <span className="text-yellow-400 dark:text-yellow-500">Link.</span>
           </div>
         </Link>
 
@@ -27,7 +28,7 @@ function Header() {
           <li className="hidden sm:block">
             <Link
               href={"/"}
-              className={`font-semibold ${path === "/" && "text-yellow-500"}`}
+              className={`font-semibold ${path === "/" && "text-yellow-400 dark:text-yellow-500"}`}
             >
               <Button variant={"ghost"}>Home</Button>
             </Link>
@@ -35,7 +36,7 @@ function Header() {
           <li className="hidden sm:block">
             <Link
               href={"/add"}
-              className={`font-semibold ${path === "/add" && "text-yellow-500"}`}
+              className={`font-semibold ${path === "/add" && "text-yellow-400 dark:text-yellow-500"}`}
             >
               <Button variant={"ghost"}>Add Contact</Button>
             </Link>
