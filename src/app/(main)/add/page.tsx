@@ -10,6 +10,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import Logo from "@/components/ui/logo";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -37,13 +38,16 @@ function AddPage() {
   }
 
   return (
-    <main className="mx-auto max-w-screen-md px-5">
+    <main className="mx-auto max-w-screen-md px-3">
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
-          className="mx-auto max-w-lg space-y-8 rounded-lg bg-slate-50 p-5 shadow-md dark:bg-slate-900"
+          className="relative z-0 mx-auto max-w-lg space-y-3 overflow-hidden rounded-lg bg-slate-50 p-5 shadow-md dark:bg-slate-900"
         >
+          <Logo className="absolute -right-10 -top-10 -z-10 h-64 w-64 fill-slate-100 dark:fill-slate-800" />
+
           <h2 className="text-center text-2xl font-bold">Add a New Contact</h2>
+          <hr />
           <FormField
             control={form.control}
             name="name"
@@ -69,6 +73,7 @@ function AddPage() {
                 <FormLabel>Phone Number</FormLabel>
                 <FormControl>
                   <Input
+                    type="tel"
                     placeholder="+62-xxx-xxxx-xxxx"
                     className="placeholder:text-slate-300 dark:placeholder:text-slate-500"
                     {...field}
@@ -78,7 +83,7 @@ function AddPage() {
               </FormItem>
             )}
           />
-          <div className="flex gap-2">
+          <div className="flex gap-2 pt-5">
             <Button
               type="button"
               size={"sm"}

@@ -16,7 +16,7 @@ function Header() {
 
   return (
     <header className="mx-auto mb-5 max-w-screen-md">
-      <nav className="flex items-center justify-between gap-10 px-5 py-5 md:px-0">
+      <nav className="flex items-center justify-between gap-10 px-3 py-5 md:px-0">
         <Link href={"/"} className="flex items-center gap-1">
           <Logo className="h-10 w-10 fill-yellow-500 transition-colors duration-150 hover:fill-yellow-700" />
           <div className={`${logoFont.className} text-2xl font-semibold`}>
@@ -26,24 +26,20 @@ function Header() {
 
         <ul className="flex items-center gap-2">
           <li className="hidden sm:block">
-            <Button variant={"ghost"}>
-              <Link
-                href={"/"}
-                className={`font-semibold ${path === "/" && "text-yellow-500"}`}
-              >
-                Home
-              </Link>
-            </Button>
+            <Link
+              href={"/"}
+              className={`font-semibold ${path === "/" && "text-yellow-500"}`}
+            >
+              <Button variant={"ghost"}>Home</Button>
+            </Link>
           </li>
           <li className="hidden sm:block">
-            <Button variant={"ghost"}>
-              <Link
-                href={"/add"}
-                className={`font-semibold ${path === "/add" && "text-yellow-500"}`}
-              >
-                Add Contact
-              </Link>
-            </Button>
+            <Link
+              href={"/add"}
+              className={`font-semibold ${path === "/add" && "text-yellow-500"}`}
+            >
+              <Button variant={"ghost"}>Add Contact</Button>
+            </Link>
           </li>
           <li>
             <ModeToggle />
