@@ -9,7 +9,7 @@ export type Contact = {
 
 export type GetContactResponse = {
   pagination: PaginationProps;
-  data: Contact[];
+  contacts: Contact[];
 };
 
 export type PaginationOptions = {
