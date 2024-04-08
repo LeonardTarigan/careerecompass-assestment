@@ -12,7 +12,6 @@ const logoFont = Outfit({ subsets: ["latin"] });
 
 function Header() {
   const path = usePathname();
-  console.log(path);
 
   return (
     <header className="mx-auto mb-5 max-w-screen-md">
