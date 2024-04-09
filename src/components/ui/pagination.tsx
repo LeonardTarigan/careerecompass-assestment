@@ -27,7 +27,7 @@ function Pagination({ current, total, prev }: PaginationProps) {
             router.push("/");
           }}
           disabled={current === 1}
-          className="flex items-center disabled:text-gray-300"
+          className="flex items-center disabled:text-slate-300 dark:disabled:text-slate-500"
         >
           <ChevronsLeft className="h-5 w-5" />
         </Button>
@@ -38,7 +38,7 @@ function Pagination({ current, total, prev }: PaginationProps) {
             router.push(`/?page=${prev}`);
           }}
           disabled={current - 1 <= 0}
-          className="flex items-center disabled:text-gray-300"
+          className="flex items-center disabled:text-slate-300 dark:disabled:text-slate-500"
         >
           <ChevronLeft className="h-5 w-5" />
         </Button>
@@ -65,7 +65,7 @@ function Pagination({ current, total, prev }: PaginationProps) {
           variant={"ghost"}
           onClick={() => {}}
           disabled={current + 1 > total}
-          className="flex items-center disabled:text-gray-300"
+          className="flex items-center disabled:text-slate-300 dark:disabled:text-slate-500"
         >
           <ChevronsRight className="h-5 w-5" />
         </Button>
@@ -74,7 +74,7 @@ function Pagination({ current, total, prev }: PaginationProps) {
           variant={"ghost"}
           onClick={() => {}}
           disabled={current >= total}
-          className="flex items-center disabled:text-gray-300"
+          className="flex items-center disabled:text-slate-300 dark:disabled:text-slate-500"
         >
           <ChevronRight className="h-5 w-5" />
         </Button>

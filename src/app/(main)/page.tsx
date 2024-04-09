@@ -1,4 +1,3 @@
-import { getContacts } from "@/api/contact/get";
 import { Button } from "@/components/ui/button";
 import { DeleteConfirmation } from "@/components/ui/delete-confirmation";
 import Pagination from "@/components/ui/pagination";
@@ -10,9 +9,11 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { GetContactResponse } from "@/lib/types";
 import { Edit3Icon } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import api from "../api/instance";
 
 export default async function HomePage({
   searchParams,
@@ -21,11 +22,13 @@ export default async function HomePage({
 }) {
   const currentPage = parseInt(searchParams["page"] ?? "1");
 
-  const { data, pagination } = await getContacts({ page: currentPage });
+  const { data } = await api.get<GetContactResponse>(
+    `/contact?page=${currentPage}`,
+  );
 
   return (
     <main className="mb-10 max-w-screen-md px-3 md:mx-auto">
-      {data?.length === 0 && (
+      {data?.contacts?.length === 0 && (
         <section className="flex h-[50vh] flex-col items-center justify-center">
           <div className="relative aspect-video w-72">
             <Image src={"/empty-street.png"} alt="Empty" fill />
@@ -43,7 +46,7 @@ export default async function HomePage({
           </Link>
         </section>
       )}
-      {data?.length > 0 && (
+      {data?.contacts?.length > 0 && (
         <>
           <Table>
             <TableHeader>
@@ -57,7 +60,7 @@ export default async function HomePage({
               </TableRow>
             </TableHeader>
             <TableBody>
-              {data.map(
+              {data?.contacts?.map(
                 ({ name, phone, createdAt, updatedAt, slug }, index) => {
                   return (
                     <TableRow key={slug}>
@@ -81,7 +84,7 @@ export default async function HomePage({
               )}
             </TableBody>
           </Table>
-          <Pagination {...pagination} />
+          <Pagination {...data.pagination} />
         </>
       )}
     </main>
