@@ -1,5 +1,6 @@
 "use client";
 
+import api from "@/app/api/instance";
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -11,8 +12,11 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import Logo from "@/components/ui/logo";
+import { PostContactReponse } from "@/lib/types";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
+import { toast } from "sonner";
 import { z } from "zod";
 
 const phoneRegex = new RegExp(
@@ -25,6 +29,8 @@ const formSchema = z.object({
 });
 
 function AddPage() {
+  const [isLoading, setIsLoading] = useState(false);
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -33,8 +39,32 @@ function AddPage() {
     },
   });
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log(values);
+  async function onSubmit(values: z.infer<typeof formSchema>) {
+    try {
+      setIsLoading(true);
+
+      const { data } = await api.post<PostContactReponse>("/contact", values);
+
+      toast("Contact Added Successfully!", {
+        description: `${data.contact.name} has been added to your phone book`,
+        action: {
+          label: "Close",
+          onClick: () => {},
+        },
+      });
+
+      form.reset();
+    } catch (e) {
+      toast("An Error Occured!", {
+        description: `Failed to save the contact`,
+        action: {
+          label: "Close",
+          onClick: () => {},
+        },
+      });
+    } finally {
+      setIsLoading(false);
+    }
   }
 
   return (
@@ -87,6 +117,7 @@ function AddPage() {
             <Button
               type="button"
               size={"sm"}
+              disabled={isLoading}
               variant={"secondary"}
               className="w-full"
             >
@@ -95,6 +126,7 @@ function AddPage() {
             <Button
               type="submit"
               size={"sm"}
+              disabled={isLoading}
               className="w-full bg-yellow-500 font-bold hover:bg-yellow-600"
             >
               Submit

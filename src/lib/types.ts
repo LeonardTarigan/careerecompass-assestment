@@ -16,6 +16,11 @@ export type GetContactDetailResponse = {
   contact: Contact;
 };
 
+export type PostContactReponse = {
+  message: string;
+  contact: Pick<Contact, "name" | "phone">;
+};
+
 export type PaginationOptions = {
   page?: number;
   pageSize?: number;
