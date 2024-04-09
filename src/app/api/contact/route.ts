@@ -37,10 +37,30 @@ export async function GET(req: NextRequest) {
     return NextResponse.json({ pagination, contacts });
   } catch (error) {
     return NextResponse.json(
-      { error },
+      { error: "Failed to fetch contacts", details: error },
       {
         status: 500,
       },
+    );
+  }
+}
+
+export async function POST(req: NextRequest) {
+  try {
+    const newContact = await req.json();
+
+    await prisma.contact.create({
+      data: newContact,
+    });
+
+    return NextResponse.json({
+      message: "Contact created successfully",
+      contact: newContact,
+    });
+  } catch (error) {
+    return NextResponse.json(
+      { error: "Failed to create contact", details: error },
+      { status: 500 },
     );
   }
 }

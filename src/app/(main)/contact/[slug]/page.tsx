@@ -12,6 +12,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import Logo from "@/components/ui/logo";
+import SkeletonFormDetail from "@/components/ui/skeleton-form-detail";
 import { GetContactDetailResponse } from "@/lib/types";
 import { formatTimestamp } from "@/lib/utils";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -77,9 +78,7 @@ function ContactDetailPage() {
 
   return (
     <main className="mx-auto max-w-screen-md px-3">
-      {!initialData && (
-        <div className="aspect-[16/8] w-full animate-pulse rounded-lg bg-slate-900"></div>
-      )}
+      {!initialData && <SkeletonFormDetail />}
       {initialData && (
         <Form {...form}>
           <form
