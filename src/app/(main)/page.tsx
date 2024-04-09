@@ -9,12 +9,11 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import axios from "axios";
+import { GetContactResponse } from "@/lib/types";
 import { Edit3Icon } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import api from "../api/instance";
-import { GetContactResponse } from "@/lib/types";
 
 export default async function HomePage({
   searchParams,
@@ -24,7 +23,7 @@ export default async function HomePage({
   const currentPage = parseInt(searchParams["page"] ?? "1");
 
   const { data } = await api.get<GetContactResponse>(
-    `/api/contact?page=${currentPage}`,
+    `/contact?page=${currentPage}`,
   );
 
   return (

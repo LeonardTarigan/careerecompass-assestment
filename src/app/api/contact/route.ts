@@ -1,6 +1,6 @@
 import prisma from "@/db/client";
 import { PaginationProps } from "@/lib/types";
-import { NextRequest, NextResponse } from "next/server";
+import { NextRequest } from "next/server";
 
 export async function GET(req: NextRequest) {
   try {
