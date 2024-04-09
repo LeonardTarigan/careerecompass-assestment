@@ -47,15 +47,27 @@ export async function GET(req: NextRequest) {
 
 export async function POST(req: NextRequest) {
   try {
-    const newContact = await req.json();
+    const { name, phone } = await req.json();
+
+    if (!name || !phone) {
+      return NextResponse.json(
+        { error: "Name and phone is required" },
+        { status: 400 },
+      );
+    }
+
+    const payloadData = {
+      name: name,
+      phone: phone,
+    };
 
     await prisma.contact.create({
-      data: newContact,
+      data: payloadData,
     });
 
     return NextResponse.json({
       message: "Contact created successfully",
-      contact: newContact,
+      contact: payloadData,
     });
   } catch (error) {
     return NextResponse.json(
