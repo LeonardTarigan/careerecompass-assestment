@@ -61,7 +61,7 @@ export default async function HomePage({
             </TableHeader>
             <TableBody>
               {data?.contacts?.map(
-                ({ name, phone, createdAt, updatedAt, slug }, index) => {
+                ({ name, phone, createdAt, updatedAt, slug, id }, index) => {
                   return (
                     <TableRow key={slug}>
                       <TableCell className="font-medium">{index + 1}</TableCell>
@@ -76,7 +76,7 @@ export default async function HomePage({
                             <Edit3Icon />
                           </Button>
                         </Link>
-                        <DeleteConfirmation />
+                        <DeleteConfirmation id={id} />
                       </TableCell>
                     </TableRow>
                   );
