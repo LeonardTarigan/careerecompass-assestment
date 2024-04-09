@@ -10,7 +10,7 @@ export async function GET(
   try {
     const contact = await prisma.contact.findUnique({ where: { slug } });
 
-    return Response.json(contact);
+    return Response.json({ contact });
   } catch (error) {
     return Response.json(
       { error },

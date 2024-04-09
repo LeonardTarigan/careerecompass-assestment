@@ -12,6 +12,10 @@ export type GetContactResponse = {
   contacts: Contact[];
 };
 
+export type GetContactDetailResponse = {
+  contact: Contact;
+};
+
 export type PaginationOptions = {
   page?: number;
   pageSize?: number;

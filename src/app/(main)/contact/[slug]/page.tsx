@@ -12,6 +12,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import Logo from "@/components/ui/logo";
+import { GetContactDetailResponse } from "@/lib/types";
 import { formatTimestamp } from "@/lib/utils";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Contact } from "@prisma/client";
@@ -52,13 +53,22 @@ function ContactDetailPage() {
 
   useEffect(() => {
     const getDetail = async () => {
-      const { data } = await api.get<Contact>(`/contact/${params.slug}`);
-      setInitialData(data);
+      const { data } = await api.get<GetContactDetailResponse>(
+        `/contact/${params.slug}`,
+      );
+      setInitialData(data.contact);
+      console.log(data);
 
-      form.setValue("name", data?.name);
-      form.setValue("phone", data?.phone);
-      form.setValue("createdAt", formatTimestamp(data?.createdAt.toString()));
-      form.setValue("updatedAt", formatTimestamp(data?.updatedAt.toString()));
+      form.setValue("name", data?.contact.name);
+      form.setValue("phone", data?.contact.phone);
+      form.setValue(
+        "createdAt",
+        formatTimestamp(data?.contact.createdAt.toString()),
+      );
+      form.setValue(
+        "updatedAt",
+        formatTimestamp(data?.contact.updatedAt.toString()),
+      );
     };
 
     getDetail();
