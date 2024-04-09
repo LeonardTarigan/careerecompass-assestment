@@ -57,7 +57,6 @@ function ContactDetailPage() {
         `/contact/${params.slug}`,
       );
       setInitialData(data.contact);
-      console.log(data);
 
       form.setValue("name", data?.contact.name);
       form.setValue("phone", data?.contact.phone);

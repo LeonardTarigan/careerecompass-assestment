@@ -1,5 +1,5 @@
 import prisma from "@/db/client";
-import { NextRequest } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(
   req: NextRequest,
@@ -10,9 +10,9 @@ export async function GET(
   try {
     const contact = await prisma.contact.findUnique({ where: { slug } });
 
-    return Response.json({ contact });
+    return NextResponse.json({ contact });
   } catch (error) {
-    return Response.json(
+    return NextResponse.json(
       { error },
       {
         status: 500,

@@ -1,6 +1,6 @@
 import prisma from "@/db/client";
 import { PaginationProps } from "@/lib/types";
-import { NextRequest } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(req: NextRequest) {
   try {
@@ -34,9 +34,9 @@ export async function GET(req: NextRequest) {
       next: nextPage,
     };
 
-    return Response.json({ pagination, contacts });
+    return NextResponse.json({ pagination, contacts });
   } catch (error) {
-    return Response.json(
+    return NextResponse.json(
       { error },
       {
         status: 500,
