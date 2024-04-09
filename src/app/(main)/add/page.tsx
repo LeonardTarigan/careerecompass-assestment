@@ -12,7 +12,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import Logo from "@/components/ui/logo";
-import { PostContactReponse } from "@/lib/types";
+import { EditContactReponse } from "@/lib/types";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
@@ -43,7 +43,7 @@ function AddPage() {
     try {
       setIsLoading(true);
 
-      const { data } = await api.post<PostContactReponse>("/contact", values);
+      const { data } = await api.post<EditContactReponse>("/contact", values);
 
       toast("Contact Added Successfully!", {
         description: `${data.contact.name} has been added to your phone book`,

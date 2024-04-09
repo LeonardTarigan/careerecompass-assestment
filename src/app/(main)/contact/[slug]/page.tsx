@@ -13,13 +13,18 @@ import {
 import { Input } from "@/components/ui/input";
 import Logo from "@/components/ui/logo";
 import SkeletonFormDetail from "@/components/ui/skeleton-form-detail";
-import { GetContactDetailResponse } from "@/lib/types";
+import {
+  EditContactPayload,
+  EditContactReponse,
+  GetContactDetailResponse,
+} from "@/lib/types";
 import { formatTimestamp } from "@/lib/utils";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Contact } from "@prisma/client";
-import { useParams } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
+import { toast } from "sonner";
 import { z } from "zod";
 
 const phoneRegex = new RegExp(
@@ -35,8 +40,10 @@ const formSchema = z.object({
 
 function ContactDetailPage() {
   const [initialData, setInitialData] = useState<Contact>();
+  const [isLoading, setIsLoading] = useState(false);
 
   const params = useParams();
+  const router = useRouter();
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -48,8 +55,54 @@ function ContactDetailPage() {
     },
   });
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log(values);
+  async function onSubmit(values: z.infer<typeof formSchema>) {
+    try {
+      setIsLoading(true);
+
+      const payload: EditContactPayload = {
+        name: values.name,
+        phone: values.phone,
+      };
+
+      const { data } = await api.put<EditContactReponse>(
+        `/contact/edit/${initialData?.id}`,
+        payload,
+      );
+
+      let toastMessage;
+      const initialName = initialData?.name;
+      const initialPhone = initialData?.phone;
+      const currentName = data.contact.name;
+      const currentPhone = data.contact.phone;
+
+      if (initialName === currentName && initialPhone === currentPhone) {
+        toastMessage = `${initialName}'s name and phone number has been updated`;
+      } else if (initialName === currentName) {
+        toastMessage = `${initialName}'s phone number has been changed to ${currentPhone}`;
+      } else if (initialPhone === currentPhone) {
+        toastMessage = `${initialName}'s name has been changed to ${currentName}`;
+      }
+
+      toast("Contact Updated Successfully!", {
+        description: toastMessage,
+        action: {
+          label: "Close",
+          onClick: () => {},
+        },
+      });
+
+      router.refresh();
+    } catch (e) {
+      toast("An Error Occured!", {
+        description: `Failed to update the contact`,
+        action: {
+          label: "Close",
+          onClick: () => {},
+        },
+      });
+    } finally {
+      setIsLoading(false);
+    }
   }
 
   useEffect(() => {
@@ -165,6 +218,11 @@ function ContactDetailPage() {
                 type="button"
                 size={"sm"}
                 variant={"secondary"}
+                disabled={
+                  (!form.getFieldState("name").isTouched &&
+                    !form.getFieldState("phone").isTouched) ||
+                  isLoading
+                }
                 className="w-full"
                 onClick={() => {
                   form.setValue("name", initialData?.name);
@@ -177,8 +235,9 @@ function ContactDetailPage() {
                 type="submit"
                 size={"sm"}
                 disabled={
-                  !form.getFieldState("name").isTouched &&
-                  !form.getFieldState("phone").isTouched
+                  (!form.getFieldState("name").isTouched &&
+                    !form.getFieldState("phone").isTouched) ||
+                  isLoading
                 }
                 className="w-full bg-yellow-500 font-bold hover:bg-yellow-600"
               >

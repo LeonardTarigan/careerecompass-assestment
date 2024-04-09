@@ -16,10 +16,12 @@ export type GetContactDetailResponse = {
   contact: Contact;
 };
 
-export type PostContactReponse = {
+export type EditContactReponse = {
   message: string;
-  contact: Pick<Contact, "name" | "phone">;
+  contact: EditContactPayload;
 };
+
+export type EditContactPayload = Pick<Contact, "name" | "phone">;
 
 export type PaginationOptions = {
   page?: number;
