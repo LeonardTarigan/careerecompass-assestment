@@ -11,6 +11,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
+import { EditContactReponse } from "@/lib/types";
 import { TrashIcon } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
@@ -30,7 +31,9 @@ export function DeleteConfirmation({ id }: DeleteConfirmationProps) {
     try {
       setIsLoading(true);
 
-      const { data } = await api.delete(`/contact/${id}`);
+      const { data } = await api.delete<EditContactReponse>(
+        `/contact/edit/${id}`,
+      );
 
       toast("Contact Deleted Successfully!", {
         description: `${data.contact.name} has been deleted from your phone book`,

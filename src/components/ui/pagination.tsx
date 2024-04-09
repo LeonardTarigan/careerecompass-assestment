@@ -12,7 +12,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { Button } from "./button";
 
-function Pagination({ current, total, prev }: PaginationProps) {
+function Pagination({ current, total, prev, next }: PaginationProps) {
   const paginationNavItems = calculatePagesToShow(current, total);
 
   const router = useRouter();
@@ -24,7 +24,7 @@ function Pagination({ current, total, prev }: PaginationProps) {
           size={"icon"}
           variant={"ghost"}
           onClick={() => {
-            router.push("/");
+            router.push("/", { scroll: false });
           }}
           disabled={current === 1}
           className="flex items-center disabled:text-slate-300 dark:disabled:text-slate-500"
@@ -35,7 +35,7 @@ function Pagination({ current, total, prev }: PaginationProps) {
           size={"icon"}
           variant={"ghost"}
           onClick={() => {
-            router.push(`/?page=${prev}`);
+            router.push(`/?page=${prev}`, { scroll: false });
           }}
           disabled={current - 1 <= 0}
           className="flex items-center disabled:text-slate-300 dark:disabled:text-slate-500"
@@ -63,20 +63,24 @@ function Pagination({ current, total, prev }: PaginationProps) {
         <Button
           size={"icon"}
           variant={"ghost"}
-          onClick={() => {}}
-          disabled={current + 1 > total}
-          className="flex items-center disabled:text-slate-300 dark:disabled:text-slate-500"
-        >
-          <ChevronsRight className="h-5 w-5" />
-        </Button>
-        <Button
-          size={"icon"}
-          variant={"ghost"}
-          onClick={() => {}}
+          onClick={() => {
+            router.push(`/?page=${next}`, { scroll: false });
+          }}
           disabled={current >= total}
           className="flex items-center disabled:text-slate-300 dark:disabled:text-slate-500"
         >
           <ChevronRight className="h-5 w-5" />
+        </Button>
+        <Button
+          size={"icon"}
+          variant={"ghost"}
+          onClick={() => {
+            router.push(`/?page=${total}`, { scroll: false });
+          }}
+          disabled={current + 1 > total}
+          className="flex items-center disabled:text-slate-300 dark:disabled:text-slate-500"
+        >
+          <ChevronsRight className="h-5 w-5" />
         </Button>
       </div>
     </div>
