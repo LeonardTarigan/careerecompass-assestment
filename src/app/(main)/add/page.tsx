@@ -120,6 +120,7 @@ function AddPage() {
               disabled={isLoading}
               variant={"secondary"}
               className="w-full"
+              onClick={() => form.reset()}
             >
               Reset
             </Button>
