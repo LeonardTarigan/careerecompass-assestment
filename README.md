@@ -1,36 +1,51 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
-
 ## Getting Started
 
-First, run the development server:
+1. Clone the repository:
+    ```
+    git clone https://github.com/LeonardTarigan/dialink.git
+    ```
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+2. Navigate into the project directory:
+    ```
+    cd ./dialink
+    ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+3. Install dependencies:
+    ```
+    pnpm install
+    ```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Database Setup
+1. Deploy the project to [Vercel](https://vercel.com/)
+2. Once deployed, go to the project dashboard, navigate to **Storage** tab and create a new Postgres database
+3. Install Vercel CLI
+   ```
+   npm i -g vercel@latest
+   ```
+4. Link the project to Vercel
+   ```
+   vercel link
+   ```
+   You will be asked a few questions regarding the project setup
+   ```
+   ? Set up "./local_project_path"? [Y/n] y
+   ? Which scope should contain your project? <vercel_account_username>
+   ? Link to existing project? [y/N] y
+   ? What's the name of your existing project? <deployed_project_name_on_vercel>
+   ```
+6. Pull the `.env` file
+   ```
+   vercel env pull .env
+   ```
+7. Migrate the database schema
+   ```
+   npx prisma db push
+   ```
+8. Run the project
+   ```
+   pnpm run dev
+   ```
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+Notes: 
+- For better instruction on the database setup, watch the tutorial [here](https://www.youtube.com/watch?v=GxUR4zIasB8&t=2283s)
+- To open the database editor, run `npx prisma studio`
