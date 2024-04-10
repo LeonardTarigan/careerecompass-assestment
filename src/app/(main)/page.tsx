@@ -62,9 +62,13 @@ export default async function HomePage({
             <TableBody>
               {data?.contacts?.map(
                 ({ name, phone, createdAt, updatedAt, slug, id }, index) => {
+                  const entryNumber = (currentPage - 1) * 10 + index + 1;
+
                   return (
                     <TableRow key={slug}>
-                      <TableCell className="font-medium">{index + 1}</TableCell>
+                      <TableCell className="font-medium">
+                        {entryNumber}
+                      </TableCell>
                       <TableCell className="shrink-0">{phone}</TableCell>
                       <TableCell className="shrink-0">{name}</TableCell>
                       <TableCell className="flex justify-end gap-2">
