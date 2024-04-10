@@ -85,7 +85,11 @@ export function DeleteConfirmation({ id }: DeleteConfirmationProps) {
           >
             Delete
           </Button>
-          <Button disabled={isLoading} variant={"secondary"}>
+          <Button
+            disabled={isLoading}
+            variant={"secondary"}
+            onClick={() => setOpenDialog(false)}
+          >
             Cancel
           </Button>
         </DialogFooter>
