@@ -10,6 +10,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import Link from "next/link";
 
 export function MobileMenu() {
   return (
@@ -20,8 +21,12 @@ export function MobileMenu() {
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
-        <DropdownMenuItem>Home</DropdownMenuItem>
-        <DropdownMenuItem>Add Contact</DropdownMenuItem>
+        <DropdownMenuItem>
+          <Link href={"/"}>Home</Link>
+        </DropdownMenuItem>
+        <DropdownMenuItem>
+          <Link href={"/add"}>Add Contact</Link>
+        </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
   );
